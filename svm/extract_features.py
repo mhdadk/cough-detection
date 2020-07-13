@@ -41,16 +41,6 @@ for label,folder in enumerate(folders): # classes
             y = librosa.resample(y = y,
                                  orig_sr = sr,
                                  target_sr = target_sr)
-            
-        # if signal is shorter than 3 ms x 44100 Hz = 128 samples, then pad it
-        # with zeros. This is necessary because PyTorch throws an error if
-        # one of the image dimensions is less than 128
-        
-        if y.shape[0] < 128:
-            
-            pad_size = 128 - y.shape[0]
-            
-            y = np.pad(y,(0,pad_size))
         
         # compute the Mel-scale spectrogram
         
@@ -63,6 +53,17 @@ for label,folder in enumerate(folders): # classes
         # apply log transformation to dilate values
         
         log_mel_specgram = librosa.power_to_db(mel_specgram)
+        
+        # this is necessary because PyTorch throws an error if one of the
+        # image dimensions is less than 128. This is because a 128 x 128
+        # image is too small for the net architecture
+        
+        if log_mel_specgram.shape[0] < 128:
+            pad_width = ((0,128 - log_mel_specgram.shape[0]),(0,0))
+            log_mel_specgram = np.pad(log_mel_specgram,pad_width)
+        elif log_mel_specgram.shape[1] < 128:
+            pad_width = ((0,0),(0,128 - log_mel_specgram.shape[1]))
+            log_mel_specgram = np.pad(log_mel_specgram,pad_width)
         
         # Add batch and channel dimensions because input to net needs to be
         # 4D (N x C x H x W)
