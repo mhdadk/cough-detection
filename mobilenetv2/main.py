@@ -16,6 +16,8 @@ from train import train
 
 from validate import validate
 
+from test import test
+
 # to put tensors on GPU if available
     
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
