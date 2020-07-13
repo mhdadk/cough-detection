@@ -112,6 +112,8 @@ class Net(nn.Module):
         
         self._load_parameters()
     
+    # assign parameters from file to layers
+    
     def _load_parameters(self):
         
         self.old_state_dict = torch.load(f = self.param_path,
