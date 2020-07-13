@@ -151,3 +151,16 @@ end = time.time()
 total_time = time.strftime("%H:%M:%S",time.gmtime(end-start))
 print('\nTotal Time Elapsed (HH:MM:SS): ' + total_time)
 print('Best Validation Accuracy: {:.2f}%'.format(best_val_acc*100))
+
+print('\nTesting...')
+
+metrics = test(net,test_dataloader,device)
+
+print('\nConfusion Matrix:\n{}\n'.format(metrics['CM']))
+print('Sensitivity/Recall: {:.3f}'.format(metrics['sens']))
+print('Specificity: {:.3f}'.format(metrics['spec']))
+print('Accuracy: {:.3f}'.format(metrics['acc']))
+print('Balanced Accuracy: {:.3f}'.format(metrics['bal_acc']))
+print('Matthews correlation coefficient: {:.3f}'.format(metrics['MCC']))
+print('Precision/PPV: {:.3f}'.format(metrics['PPV']))
+print('NPV: {:.3f}'.format(metrics['NPV']))
