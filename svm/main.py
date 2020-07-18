@@ -26,7 +26,7 @@ clf = SVC(C = 200.0,
           class_weight = 'balanced',
           random_state = 42)
 
-# train the SVM on the balanced or unbalanced dataset
+# train the SVM
 
 clf.fit(X_train, y_train)
 
