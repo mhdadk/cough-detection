@@ -2,13 +2,16 @@ import numpy as np
 import pickle
 from sklearn.model_selection import train_test_split
 from sklearn.svm import SVC
-from compute_metrics import compute_metrics
 from joblib import dump
+
+import os,sys
+sys.path.append(os.path.abspath('../../utils'))
+from compute_metrics import compute_metrics
 
 # load feature vectors and labels
 
-X = np.load('X.npy')
-with open('labels.pkl','rb') as f:
+X = np.load('../features/X.npy')
+with open('../features/labels.pkl','rb') as f:
     y = pickle.load(f)
 
 # split data

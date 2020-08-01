@@ -1,0 +1,1 @@
+This folder stores the dataset used for cough detection, which can be downloaded from [here](https://drive.google.com/file/d/19XyGihClOE4Vn0dM0IqQI1wA8NfZ9SQI/view?usp=sharing). This folder should contain two sub-folders: `0_not_cough` and `1_cough`.

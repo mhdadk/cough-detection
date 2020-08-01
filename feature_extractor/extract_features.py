@@ -5,7 +5,7 @@ import numpy as np
 from net import Net
 import pickle
 
-data_dir = '../../data_audio'
+data_dir = '../data'
 folders = os.listdir(data_dir)
 
 # data to be extracted
@@ -84,8 +84,10 @@ for label,folder in enumerate(folders): # classes
         X = np.vstack((X,fv))
         labels.append(label)    
 
-with open('X.npy','wb') as f:
+# save the feature vectors and their labels
+
+with open('../features/X.npy','wb') as f:
     np.save(file = f, arr = X)
 
-with open('labels.pkl','wb') as f:
+with open('../features/labels.pkl','wb') as f:
     pickle.dump(labels,f)
